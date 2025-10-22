@@ -7,7 +7,7 @@ import { QdrantVectorStore } from "@langchain/qdrant";
 import OpenAI  from 'openai';
 
 const client = new OpenAI({
-  apiKey:'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',
+  apiKey:'OPENAI-API-KEY',
 });
 
 const queue= new Queue('file-upload-queue', {
@@ -44,7 +44,7 @@ app.get('/chat', async (req, res)=> {
   const userQuery= req.query.message;
   const embeddings = new OpenAIEmbeddings({
             model:'text-embedding-3-small',
-            apiKey:'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'
+            apiKey:'OPENAI-API-KEY'
           });
   const vectorStore = await QdrantVectorStore.fromExistingCollection( 
             embeddings, 
