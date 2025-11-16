@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@langchain/community':
         specifier: ^1.0.0
-        version: 1.0.0(@browserbasehq/sdk@2.6.0)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.56.1)(deepmerge@4.3.1)(dotenv@16.6.1)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(zod@4.1.12))(@ibm-cloud/watsonx-ai@1.7.0)(@langchain/core@1.0.1(openai@6.6.0(ws@8.18.3)(zod@4.1.12)))(ibm-cloud-sdk-core@5.4.3)(ioredis@5.8.2)(jsonwebtoken@9.0.2)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(pdf-parse@1.1.1)(playwright@1.56.1)(ws@8.18.3)
+        version: 1.0.0(@browserbasehq/sdk@2.6.0)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.56.1)(deepmerge@4.3.1)(dotenv@17.2.3)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(zod@4.1.12))(@ibm-cloud/watsonx-ai@1.7.0)(@langchain/core@1.0.1(openai@6.6.0(ws@8.18.3)(zod@4.1.12)))(ibm-cloud-sdk-core@5.4.3)(ioredis@5.8.2)(jsonwebtoken@9.0.2)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(pdf-parse@1.1.1)(playwright@1.56.1)(ws@8.18.3)
       '@langchain/core':
         specifier: ^1.0.1
         version: 1.0.1(openai@6.6.0(ws@8.18.3)(zod@4.1.12))
@@ -26,9 +26,15 @@ importers:
       cors:
         specifier: ^2.8.5
         version: 2.8.5
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
       express:
         specifier: ~4.21.2
         version: 4.21.2
+      express-rate-limit:
+        specifier: ^8.2.1
+        version: 8.2.1(express@4.21.2)
       langchain:
         specifier: ^1.0.1
         version: 1.0.1(@langchain/core@1.0.1(openai@6.6.0(ws@8.18.3)(zod@4.1.12)))(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(zod-to-json-schema@3.24.6(zod@4.1.12))
@@ -811,6 +817,10 @@ packages:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
     engines: {node: '>=12'}
 
+  dotenv@17.2.3:
+    resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
+    engines: {node: '>=12'}
+
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
@@ -865,6 +875,12 @@ packages:
 
   expr-eval@2.0.2:
     resolution: {integrity: sha512-4EMSHGOPSwAfBiibw3ndnP0AvjDWLsMvGOvWEZ2F96IGk0bIVdjQisOHxReSkE13mHcfbuCiXw+G4y0zv6N8Eg==}
+
+  express-rate-limit@8.2.1:
+    resolution: {integrity: sha512-PCZEIEIxqwhzw4KF0n7QF4QqruVTcF73O5kFKUnGOyjbCCgizBBiFaYpd/fnBLUMPw/BWw9OsiN7GgrNYr7j6g==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      express: '>= 4.11'
 
   express@4.21.2:
     resolution: {integrity: sha512-28HqgMZAmih1Czt9ny7qr6ek2qddF4FclbMzwhCREB6OFfH+rXAnuNCwo1/wFvrtbgsQDb4kSbX9de9lFbrXnA==}
@@ -978,6 +994,10 @@ packages:
   ioredis@5.8.2:
     resolution: {integrity: sha512-C6uC+kleiIMmjViJINWk80sOQw5lEzse1ZmvD+S/s8p8CWapftSaC+kocGTx6xrbrJ4WmYQGC08ffHLr6ToR6Q==}
     engines: {node: '>=12.22.0'}
+
+  ip-address@10.0.1:
+    resolution: {integrity: sha512-NWv9YLW4PoW2B7xtzaS3NCot75m6nK7Icdv0o3lfMceJVRfSoQwqD4wEH5rLwoKJwUiZ/rfpiVBhnaF0FK4HoA==}
+    engines: {node: '>= 12'}
 
   ipaddr.js@1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
@@ -1496,13 +1516,13 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@browserbasehq/stagehand@1.14.0(@playwright/test@1.56.1)(deepmerge@4.3.1)(dotenv@16.6.1)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(zod@4.1.12)':
+  '@browserbasehq/stagehand@1.14.0(@playwright/test@1.56.1)(deepmerge@4.3.1)(dotenv@17.2.3)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(zod@4.1.12)':
     dependencies:
       '@anthropic-ai/sdk': 0.27.3
       '@browserbasehq/sdk': 2.6.0
       '@playwright/test': 1.56.1
       deepmerge: 4.3.1
-      dotenv: 16.6.1
+      dotenv: 17.2.3
       openai: 6.6.0(ws@8.18.3)(zod@4.1.12)
       ws: 8.18.3
       zod: 4.1.12
@@ -1547,9 +1567,9 @@ snapshots:
       - openai
       - ws
 
-  '@langchain/community@1.0.0(@browserbasehq/sdk@2.6.0)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.56.1)(deepmerge@4.3.1)(dotenv@16.6.1)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(zod@4.1.12))(@ibm-cloud/watsonx-ai@1.7.0)(@langchain/core@1.0.1(openai@6.6.0(ws@8.18.3)(zod@4.1.12)))(ibm-cloud-sdk-core@5.4.3)(ioredis@5.8.2)(jsonwebtoken@9.0.2)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(pdf-parse@1.1.1)(playwright@1.56.1)(ws@8.18.3)':
+  '@langchain/community@1.0.0(@browserbasehq/sdk@2.6.0)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.56.1)(deepmerge@4.3.1)(dotenv@17.2.3)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(zod@4.1.12))(@ibm-cloud/watsonx-ai@1.7.0)(@langchain/core@1.0.1(openai@6.6.0(ws@8.18.3)(zod@4.1.12)))(ibm-cloud-sdk-core@5.4.3)(ioredis@5.8.2)(jsonwebtoken@9.0.2)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(pdf-parse@1.1.1)(playwright@1.56.1)(ws@8.18.3)':
     dependencies:
-      '@browserbasehq/stagehand': 1.14.0(@playwright/test@1.56.1)(deepmerge@4.3.1)(dotenv@16.6.1)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(zod@4.1.12)
+      '@browserbasehq/stagehand': 1.14.0(@playwright/test@1.56.1)(deepmerge@4.3.1)(dotenv@17.2.3)(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(zod@4.1.12)
       '@ibm-cloud/watsonx-ai': 1.7.0
       '@langchain/classic': 1.0.0(@langchain/core@1.0.1(openai@6.6.0(ws@8.18.3)(zod@4.1.12)))(openai@6.6.0(ws@8.18.3)(zod@4.1.12))(ws@8.18.3)
       '@langchain/core': 1.0.1(openai@6.6.0(ws@8.18.3)(zod@4.1.12))
@@ -1932,6 +1952,8 @@ snapshots:
 
   dotenv@16.6.1: {}
 
+  dotenv@17.2.3: {}
+
   dunder-proto@1.0.1:
     dependencies:
       call-bind-apply-helpers: 1.0.2
@@ -1974,6 +1996,11 @@ snapshots:
   events@3.3.0: {}
 
   expr-eval@2.0.2: {}
+
+  express-rate-limit@8.2.1(express@4.21.2):
+    dependencies:
+      express: 4.21.2
+      ip-address: 10.0.1
 
   express@4.21.2:
     dependencies:
@@ -2129,7 +2156,7 @@ snapshots:
       isstream: 0.1.2
       jsonwebtoken: 9.0.2
       mime-types: 2.1.35
-      retry-axios: 2.6.0(axios@1.12.2)
+      retry-axios: 2.6.0(axios@1.12.2(debug@4.4.3))
       tough-cookie: 4.1.4
     transitivePeerDependencies:
       - supports-color
@@ -2155,6 +2182,8 @@ snapshots:
       standard-as-callback: 2.1.0
     transitivePeerDependencies:
       - supports-color
+
+  ip-address@10.0.1: {}
 
   ipaddr.js@1.9.1: {}
 
@@ -2425,7 +2454,7 @@ snapshots:
 
   requires-port@1.0.0: {}
 
-  retry-axios@2.6.0(axios@1.12.2):
+  retry-axios@2.6.0(axios@1.12.2(debug@4.4.3)):
     dependencies:
       axios: 1.12.2(debug@4.4.3)
 

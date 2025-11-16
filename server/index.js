@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import cors  from 'cors';
 import multer from 'multer';
@@ -5,9 +6,13 @@ import {Queue} from 'bullmq';
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { QdrantVectorStore } from "@langchain/qdrant";
 import OpenAI  from 'openai';
+import {rateLimit} from 'express-rate-limit';
+
+const openai_api_key=process.env.OPENAI_API_KEY;
+const port=process.env.PORT
 
 const client = new OpenAI({
-  apiKey:'OPENAI-API-KEY',
+  apiKey : openai_api_key ,
 });
 
 const queue= new Queue('file-upload-queue', {
@@ -20,6 +25,16 @@ const queue= new Queue('file-upload-queue', {
 const app = express();
 app.use(cors());
 
+const limiter = rateLimit({
+  windowMs: 1000*60*1,
+  max: 2,
+  message: 'Too many requests from this IP, please try again after 1 minutes',
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+app.use(limiter);
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/')
@@ -30,7 +45,7 @@ const storage = multer.diskStorage({
   }
 });
 
-
+// api key
 const upload = multer({ storage: storage  })
 
 app.get('/', (req, res)=> {
@@ -43,8 +58,8 @@ app.get('/chat', async (req, res)=> {
   console.log(`req: ${req.query.message}`);
   const userQuery= req.query.message;
   const embeddings = new OpenAIEmbeddings({
-            model:'text-embedding-3-small',
-            apiKey:'OPENAI-API-KEY'
+            model: 'text-embedding-3-small',
+            apiKey: openai_api_key,
           });
   const vectorStore = await QdrantVectorStore.fromExistingCollection( 
             embeddings, 
@@ -94,4 +109,4 @@ app.post('/upload/pdf', upload.single('pdf'), async (req, res)=>{
  return res.json({message:'file uploaded to server and EnQueued successfully'});
 });
 
-app.listen(8000, ()=> console.log('server is running on port 8000'));
+app.listen(port, ()=> console.log(`server is running on port ${port}`));

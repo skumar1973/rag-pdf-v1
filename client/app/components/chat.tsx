@@ -30,11 +30,17 @@ const ChatComponent:React.FC = () => {
     const handleSendChatMessage = async () => {
         setMessages((prev) => [...prev, { role : 'user', content : message }]);
         // console.log(`message: ${message}`);
-        const res = await fetch(`http://localhost:8000/chat?message=${message}`);
-        const data = await res.json();
+        try{
+            const res = await fetch(`http://localhost:8000/chat?message=${message}`);
+            console.log(`res= ${res}`);
+            const data = await res.json();
         // console.log("send query to server.", message);
         // console.log(" data from server ", {data});
-        setMessages((prev) => [...prev, { role: 'assistant', content: data?.message , documents: data?.docs}]);
+            setMessages((prev) => [...prev, { role: 'assistant', content: data?.message , documents: data?.docs}]);
+        } catch (error){
+            console.log(error);
+        }
+        
     };
     return (
         <div className="p-4">
@@ -42,8 +48,7 @@ const ChatComponent:React.FC = () => {
                 {messages.map((message, index) => 
                 <Card key={index}> 
                     <CardContent>
-                        <span>{message?.role}</span>
-                        <p> {message?.content} </p>
+                        <p> <span> {message?.role=='user'?'👤':'֎🇦🇮'} </span> {message?.content} </p>
                     </CardContent> 
                 </Card>
                 )}

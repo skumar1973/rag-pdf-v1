@@ -1,8 +1,11 @@
+import 'dotenv/config' ;
 import { Worker } from 'bullmq';
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { QdrantVectorStore } from "@langchain/qdrant";
 import { Document } from "@langchain/core/documents";
 import { PDFLoader } from '@langchain/community/document_loaders/fs/pdf';
+
+const openai_api_key = process.env.OPENAI_API_KEY
 
 const worker = new Worker('file-upload-queue', 
     async (job) => {
@@ -14,7 +17,7 @@ const worker = new Worker('file-upload-queue',
         call the openai embedding model for every chunk
         store the chunk in qdarnt db
         */
-        
+        console.log('worker started...');
         const data=JSON.parse(job.data);
         // console.log('job', job.data)  ;
         // console.log('path', data.path);
@@ -25,7 +28,8 @@ const worker = new Worker('file-upload-queue',
         // const client = new QdrantClient({ url: `http://localhost:6333` });
         const embeddings = new OpenAIEmbeddings({
             model:'text-embedding-3-small',
-            apiKey:'OPENAI-API-KEY'});
+            apiKey: openai_api_key
+        });
         const vectorStore = await QdrantVectorStore.fromExistingCollection( 
             embeddings, 
             {
